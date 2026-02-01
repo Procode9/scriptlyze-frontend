@@ -178,4 +178,115 @@ Did you know that 95% of YouTubers quit before hitting 1000 subscribers? I was a
                 {Object.entries(result.scores).map(([key, value]: [string, any]) => (
                   <div key={key}>
                     <div className="flex justify-between mb-2">
-                      <span className="font-medium capitaliz
+                      <span className="font-medium capitalize">{key.replace('_', ' ')}</span>
+                      <span className="font-bold">{value}/10</span>
+                    </div>
+                    <div className="h-3 bg-dark-800 rounded-full overflow-hidden">
+                      <div
+                        className={`h-full transition-all ${
+                          value >= 8 ? 'bg-green-500' : value >= 6 ? 'bg-yellow-500' : 'bg-red-500'
+                        }`}
+                        style={{ width: `${value * 10}%` }}
+                      />
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Strengths */}
+              {result.strengths?.length > 0 && (
+                <div className="card">
+                  <h3 className="text-lg font-bold mb-4 text-green-400">✓ Strengths</h3>
+                  <ul className="space-y-3">
+                    {result.strengths.map((strength: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <span className="text-green-500 mt-1 flex-shrink-0">✓</span>
+                        <span>{strength}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+
+              {/* Weaknesses */}
+              {result.weaknesses?.length > 0 && (
+                <div className="card">
+                  <h3 className="text-lg font-bold mb-4 text-yellow-400">⚠ Weaknesses</h3>
+                  <ul className="space-y-3">
+                    {result.weaknesses.map((weakness: string, i: number) => (
+                      <li key={i} className="flex items-start gap-2 text-sm">
+                        <span className="text-yellow-500 mt-1 flex-shrink-0">!</span>
+                        <span>{weakness}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Improvements */}
+            {result.improvements?.length > 0 && (
+              <div className="card">
+                <h3 className="text-xl font-bold mb-4">💡 Improvement Suggestions</h3>
+                <div className="space-y-4">
+                  {result.improvements.map((imp: any, i: number) => (
+                    <div key={i} className="border border-dark-800 rounded-lg p-4 bg-dark-900/50">
+                      <div className="flex items-start gap-3">
+                        <div className="w-8 h-8 rounded-full bg-primary-500/20 flex items-center justify-center flex-shrink-0 mt-1">
+                          <span className="text-primary-400 font-bold">{i + 1}</span>
+                        </div>
+                        <div className="flex-1">
+                          <div className="font-semibold text-primary-400 mb-1">{imp.section}</div>
+                          <div className="text-dark-400 text-sm mb-3">
+                            <strong>Issue:</strong> {imp.issue}
+                          </div>
+                          <div className="bg-dark-800 p-3 rounded-lg">
+                            <strong className="text-green-400">Suggestion:</strong>
+                            <p className="mt-1">{imp.suggestion}</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Viral Patterns */}
+            <div className="card">
+              <h3 className="text-lg font-bold mb-4">Viral Patterns</h3>
+              
+              {result.viral_patterns_detected?.length > 0 && (
+                <div className="mb-4">
+                  <div className="text-sm text-green-400 font-semibold mb-2">✓ Detected</div>
+                  <div className="flex flex-wrap gap-2">
+                    {result.viral_patterns_detected.map((pattern: string, i: number) => (
+                      <span key={i} className="px-2 py-1 bg-green-500/20 text-green-400 rounded text-xs">
+                        {pattern}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {result.viral_patterns_missing?.length > 0 && (
+                <div>
+                  <div className="text-sm text-yellow-400 font-semibold mb-2">⚠ Missing</div>
+                  <div className="flex flex-wrap gap-2">
+                    {result.viral_patterns_missing.map((pattern: string, i: number) => (
+                      <span key={i} className="px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded text-xs">
+                        {pattern}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
