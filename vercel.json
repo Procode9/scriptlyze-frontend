@@ -1,26 +1,6 @@
 {
   "version": 2,
-  "name": "scriptlyze-frontend",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/next"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/(.*)",
-      "dest": "/$1"
-    }
-  ],
   "env": {
-    "NEXT_PUBLIC_API_URL": "https://api.scriptlyze.com"
-  },
-  "regions": ["iad1", "sfo1", "fra1"],
-  "functions": {
-    "app/**/*.tsx": {
-      "memory": 1024,
-      "maxDuration": 10
-    }
+    "NEXT_PUBLIC_API_URL": "https://scriptlyze-backend-production.up.railway.app"
   }
 }
