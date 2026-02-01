@@ -89,3 +89,70 @@ export default function HistoryPage() {
                             : 'bg-red-500/20 text-red-400'
                         }`}>
                           {item.virality_prediction}
+                        </span>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center gap-6">
+                      <div className="text-right">
+                        <div className={`text-4xl font-bold ${
+                          item.overall_score >= 8
+                            ? 'text-green-400'
+                            : item.overall_score >= 6
+                            ? 'text-yellow-400'
+                            : 'text-red-400'
+                        }`}>
+                          {item.overall_score.toFixed(1)}
+                        </div>
+                        <div className="text-xs text-dark-500">Score</div>
+                      </div>
+
+                      <div className="flex gap-2">
+                        <Link
+                          href={`/analysis/${item.id}`}
+                          className="btn btn-outline flex items-center gap-2"
+                        >
+                          <Eye className="w-4 h-4" />
+                          View
+                        </Link>
+                        <button
+                          onClick={() => handleDelete(item.id, item.title)}
+                          className="btn btn-outline text-red-400 hover:bg-red-500/10 flex items-center gap-2"
+                        >
+                          <Trash2 className="w-4 h-4" />
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Pagination */}
+            {history && history.total > limit && (
+              <div className="flex justify-center gap-4 mt-8">
+                <button
+                  onClick={() => setOffset(Math.max(0, offset - limit))}
+                  disabled={offset === 0}
+                  className="btn btn-outline disabled:opacity-50"
+                >
+                  Previous
+                </button>
+                <span className="flex items-center text-dark-400">
+                  Page {Math.floor(offset / limit) + 1} of {Math.ceil(history.total / limit)}
+                </span>
+                <button
+                  onClick={() => setOffset(offset + limit)}
+                  disabled={offset + limit >= history.total}
+                  className="btn btn-outline disabled:opacity-50"
+                >
+                  Next
+                </button>
+              </div>
+            )}
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
